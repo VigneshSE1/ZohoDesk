@@ -1,0 +1,16 @@
+[error] [2024-01-19T07:24:22.180Z] : uncaughtException: Cannot find module 'D:\ZohoExtenstion\Final\ProGamify\node_modules\jest-worker\build\workers\threadChild.js'
+Error: Cannot find module 'D:\ZohoExtenstion\Final\ProGamify\node_modules\jest-worker\build\workers\threadChild.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1077:15)
+    at Module._load (node:internal/modules/cjs/loader:922:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:86:12)
+    at MessagePort.<anonymous> (node:internal/main/worker_thread:164:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:757:20)
+    at exports.emitMessage (node:internal/per_context/messageport:23:28)
+[error] [2024-01-19T07:24:22.186Z] : uncaughtException: Cannot find module 'D:\ZohoExtenstion\Final\ProGamify\node_modules\jest-worker\build\workers\threadChild.js'
+Error: Cannot find module 'D:\ZohoExtenstion\Final\ProGamify\node_modules\jest-worker\build\workers\threadChild.js'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1077:15)
+    at Module._load (node:internal/modules/cjs/loader:922:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:86:12)
+    at MessagePort.<anonymous> (node:internal/main/worker_thread:164:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:757:20)
+    at exports.emitMessage (node:internal/per_context/messageport:23:28)
