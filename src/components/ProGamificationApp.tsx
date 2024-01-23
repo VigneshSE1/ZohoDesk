@@ -1,10 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { ZohoDeskContext } from "../ZohoDeskContext/ZohoDeskContext";
-import PopupButton from "../PopupButton";
-import { Button } from "./Button";
-import { OpenLocationButton } from "./OpenLocationButton/OpenLocationButton";
-import { RenderObject } from "./RenderObject";
-import Menu from "./Menu/Menu";
+import { Menu } from "./Menu/Menu";
 
 const ProGamificationApp = () => {
   const [ticket, setTicket] = useState({});
@@ -22,7 +18,6 @@ const ProGamificationApp = () => {
         // Handle error
       }
     };
-
     fetchTicket();
   }, []);
 
@@ -79,12 +74,9 @@ const ProGamificationApp = () => {
   } else {
     return (
       <>
-        <h2 className="text-xl font-bold p-1 bg-blue-200 text-center">
-          React Extension with Tailwind Samples
-        </h2>
         <Menu
-          userId={"50aab225-10a2-47e8-bc35-fa48d1d45e0e"}
-          applicationId={"652e75c5e23dd83338f6dd93"}
+          userId={"c59c355c-bb89-44d1-87b6-87aa4239c11b"}
+          applicationId={"65a76e3376b3472741f939b3"}
           clientId={"08ce0068-2906-44d4-b840-b268e5511624"}
           clientSecret={"2BG8Q~Vsd33.QQ93jcejZkrr5aVyXvxbl_FrubYg"}
         />

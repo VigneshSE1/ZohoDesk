@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import axios from "axios";
 import { URL } from "../config/URL.Config";
 let clientCredentials;
-const getAccessToken = () => __awaiter(void 0, void 0, void 0, function* () {
+export const getAccessToken = () => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield axios.post(`${URL.token.getAuthToken}`, {
         clientId: clientCredentials.clientId,
         clientSecret: clientCredentials.clientSecret,
@@ -23,4 +23,3 @@ export const initializeClientCredentials = (clientId, clientSecret) => {
         clientSecret: clientSecret,
     };
 };
-export default getAccessToken;

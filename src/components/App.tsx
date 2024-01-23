@@ -1,6 +1,5 @@
-import { ZohoDeskProvider } from '../ZohoDeskContext/ZohoDeskProvider';
-import Menu from './Menu/Menu';
-import ProGamificationApp from './ProGamificationApp';
+import { ZohoDeskProvider } from "../ZohoDeskContext/ZohoDeskProvider";
+import ProGamificationApp from "./ProGamificationApp";
 
 const App = () => {
   return (

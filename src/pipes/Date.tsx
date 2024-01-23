@@ -1,9 +1,15 @@
-import moment from "moment";
+export function DateConverter(inputDate: string): string {
+  return inputDate;
+  const date = new Date(inputDate);
 
-export function DateConverter(inputDate: string) {
-	const date = new Date(inputDate);
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  };
 
-	const formattedDate = moment(date).format("dddd, MMMM Do YYYY");
+  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
 
-	return formattedDate;
+  return formattedDate;
 }

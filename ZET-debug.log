@@ -14,3 +14,19 @@ Error: Cannot find module 'D:\ZohoExtenstion\Final\ProGamify\node_modules\jest-w
     at MessagePort.<anonymous> (node:internal/main/worker_thread:164:24)
     at [nodejs.internal.kHybridDispatch] (node:internal/event_target:757:20)
     at exports.emitMessage (node:internal/per_context/messageport:23:28)
+[error] [2024-01-19T10:26:45.052Z] : uncaughtException: Cannot find module '../types'
+Require stack:
+- D:\ZohoExtenstion\Final\ProGamify\node_modules\jest-worker\build\workers\threadChild.js
+Error: Cannot find module '../types'
+Require stack:
+- D:\ZohoExtenstion\Final\ProGamify\node_modules\jest-worker\build\workers\threadChild.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1077:15)
+    at Module._load (node:internal/modules/cjs/loader:922:27)
+    at Module.require (node:internal/modules/cjs/loader:1143:19)
+    at require (node:internal/modules/cjs/helpers:119:18)
+    at Object.<anonymous> (D:\ZohoExtenstion\Final\ProGamify\node_modules\jest-worker\build\workers\threadChild.js:13:14)
+    at Module._compile (node:internal/modules/cjs/loader:1256:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1310:10)
+    at Module.load (node:internal/modules/cjs/loader:1119:32)
+    at Module._load (node:internal/modules/cjs/loader:960:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:86:12)

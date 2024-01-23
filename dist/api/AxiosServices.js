@@ -9,36 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import axios from "axios";
 import * as authStorage from "./Auth.service";
-import getAccessToken from "./TokenService";
-import jwtDecode from "jwt-decode";
+import { getAccessToken } from "./TokenService";
 export default class AxiosServices {
     constructor() {
         this.axiosInstance = axios.create();
-        this.registerRequestInterceptor();
-    }
-    registerRequestInterceptor() {
-        this.axiosInstance.interceptors.request.use((config) => __awaiter(this, void 0, void 0, function* () {
-            let accessToken = authStorage.getAuthToken();
-            let decodedToken;
-            if (!accessToken) {
-                accessToken = yield this.createAuthToken();
-            }
-            if (accessToken) {
-                decodedToken = jwtDecode(accessToken);
-                const validTo = decodedToken.exp * 1000;
-                const now = new Date().getTime();
-                if (now >= validTo) {
-                    accessToken = yield this.createAuthToken();
-                }
-            }
-            else {
-                return false;
-            }
-            config.headers["Authorization"] = `Bearer ${accessToken}`;
-            return config;
-        }), (error) => {
-            return Promise.reject(error);
-        });
     }
     createAuthToken() {
         return __awaiter(this, void 0, void 0, function* () {

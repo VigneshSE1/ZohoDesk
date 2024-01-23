@@ -1,47 +1,28 @@
-import React, { FC, useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Tabs from "../Tabs/Tabs";
-import { Info } from "../../common/icons/Info";
-import MenuStyles from "./Menu.styles";
-import { PopupService } from "../../api/PopupService";
-
+import { initializeClientCredentials } from "../../api/TokenService";
 import {
-  getLeaderBoardByUserId,
+  getLocalLeaderBoardByUserId,
   getSasToken,
   getUserInfo,
 } from "../../api/LeaderBoardService";
-import { Bolt } from "../../common/icons/Bolt";
 import { ILeaderBoard } from "../../models/LeaderBoard";
-import { initializeClientCredentials } from "../../api/TokenService";
+import { Bolt } from "../../common/icons/Bolt";
 import GlobalStyles from "../../common/styles/global.styles";
-import { DomainEvent } from "../../utils/eventDispatcher";
-import useEvent from "../../utils/useEvents";
-import { DomainEvents } from "../../enums/DomainEvents";
+import MenuStyles from "./Menu.styles";
+import { PopupService } from "../../api/PopupService";
+import { Info } from "../../common/icons/Info";
+import Achievement from "../Achievements/Achievements";
+import LeaderBoard from "../LeaderBoard/LeaderBoard";
 
-interface MenuProps {
-  userId: string;
-  applicationId: string;
-  clientId: string;
-  clientSecret: string;
-}
-
-const Menu: FC<MenuProps> = (props) => {
-  initializeClientCredentials(props.clientId, props.clientSecret);
-  //   return (
-  //     <div>
-  //       <h1>{props.clientId}</h1>
-  //       <h2>{props.clientSecret}</h2>
-  //     </div>
-  //   );
+export const Menu = (props: any) => {
   const [showTabs, setShowTabs] = useState(false);
   const [sasToken, setSasToken] = useState<string>("");
   let [userInfo, setUserInfo] = useState<any>({});
+  initializeClientCredentials(props.clientId, props.clientSecret);
   const handleToggleTabs = () => {
     setShowTabs(!showTabs);
   };
-  const userCreatedEvent: DomainEvent | undefined = useEvent(
-    DomainEvents.GETUSERINFO
-  );
-
   useEffect(() => {
     getUserInfo(props.userId, props.applicationId)
       .then((response) => {
@@ -57,7 +38,7 @@ const Menu: FC<MenuProps> = (props) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-    getLeaderBoardByUserId(props.userId, props.applicationId)
+    getLocalLeaderBoardByUserId(props.userId, props.applicationId)
       .then((responseData: ILeaderBoard) => {
         const currentUser = responseData.Items.find(
           (user) => user.userId === props.userId
@@ -70,15 +51,16 @@ const Menu: FC<MenuProps> = (props) => {
           }));
         }
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.error("Error fetching data:", error);
       });
-  }, [props.userId, props.applicationId, userCreatedEvent]);
+  }, [props.userId, props.applicationId]);
 
+  useEffect(() => {});
   return (
     <PopupService>
       <GlobalStyles.DMFonts>
-        <MenuStyles.Menu>
+        {/* <MenuStyles.Menu>
           <MenuStyles.Header>
             <div>
               <Info applicationId={props.applicationId} />
@@ -109,10 +91,22 @@ const Menu: FC<MenuProps> = (props) => {
               />
             </div>
           )}
-        </MenuStyles.Menu>
+        </MenuStyles.Menu> */}
+        <div style={{ display: "flex", height: "100vh" }}>
+          <Achievement
+            userId={props.userId}
+            applicationId={props.applicationId}
+            clientId={props.clientId}
+            clientSecret={props.clientSecret}
+            userScore={props.userScore}
+            redemptionEnabled={props.redemptionEnabled}
+          />
+          <LeaderBoard
+            userInfo={userInfo}
+            applicationId={props.applicationId}
+          />
+        </div>
       </GlobalStyles.DMFonts>
     </PopupService>
   );
 };
-
-export default Menu;

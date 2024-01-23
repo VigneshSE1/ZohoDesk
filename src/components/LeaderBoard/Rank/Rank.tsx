@@ -1,102 +1,150 @@
-import React, { FC } from "react";
-import { ILeaderBoard } from "../../../models/LeaderBoard";
 import RankStyles from "./Rank.styles";
+import React from "react";
+import { env } from "../../../env/env";
 
-interface RankProps {
-	leaderBoard?: ILeaderBoard | null;
-	sasToken?: string;
-	userId: string;
-}
+const LeaderBoard: React.FC<{
+  leaderBoard: any[];
+  userId: string;
+  sasToken: string;
+}> = (props) => {
+  const imgErrorHandler = (event: any) => {
+    event.target.src = `${env.BLOB_URL}/${env.CONTAINER_PATH}/avatar.png`;
+  };
 
-const Rank: FC<RankProps> = (props: any) => {
-	const isRank = (count: number) => props?.leaderBoard?.Items?.length > count;
+  const ellipticString = (userName: string, index: number) => {
+    // Implement your ellipticString function
+    return userName?.length > 10
+      ? userName.substring(0, 10) + "..."
+      : userName || `player-${index}`;
+  };
 
-	return (
-		<RankStyles.Container>
-			<div className="rank-holder">
-				<div className="rank-2">
-					<div className="dp">
-						<img
-							className={`profile ${
-								!isRank(1) ||
-								!props?.leaderBoard?.Items[1]?.profileImageUrl ||
-								!props?.sasToken
-									? "default-avatar"
-									: ""
-							} ${
-								props?.leaderBoard?.Items[1]?.userId === props.userId
-									? "highlighted"
-									: ""
-							}`}
-							alt=""
-							src={
-								props?.leaderBoard?.Items[1]?.profileImageUrl + props?.sasToken
-							}
-						/>
-						<span>{isRank(1) ? props?.leaderBoard?.Items[1]?.rank : 0}</span>
-					</div>
-					<div className="username">
-						{isRank(1) ? props?.leaderBoard?.Items[1]?.userName : "Player 2"}
-					</div>
-					<div className="score">
-						<span>{isRank(1) ? props?.leaderBoard?.Items[1]?.score : 0}</span>
-					</div>
-				</div>
-				<div className="rank-1">
-					<div className="dp">
-						<img
-							className={`profile ${
-								!isRank(0) || !props?.leaderBoard?.Items[0]?.profileImageUrl
-									? "default-avatar"
-									: ""
-							} ${
-								props?.leaderBoard?.Items[0]?.userId === props.userId
-									? "highlighted"
-									: ""
-							}`}
-							alt=""
-							src={
-								props?.leaderBoard?.Items[0]?.profileImageUrl + props?.sasToken
-							}
-						/>
-						<span>{isRank(0) ? props?.leaderBoard?.Items[0]?.rank : 0}</span>
-					</div>
-					<div className="username">
-						{isRank(0) ? props?.leaderBoard?.Items[0]?.userName : "Player 1"}
-					</div>
-					<div className="score">
-						<span>{isRank(0) ? props?.leaderBoard?.Items[0]?.score : 0}</span>
-					</div>
-				</div>
-				<div className="rank-3">
-					<div className="dp">
-						<img
-							className={`profile ${
-								!isRank(2) || !props?.leaderBoard?.Items[2]?.profileImageUrl
-									? "default-avatar"
-									: ""
-							} ${
-								props?.leaderBoard?.Items[2]?.userId === props.userId
-									? "highlighted"
-									: ""
-							}`}
-							alt=""
-							src={
-								props?.leaderBoard?.Items[2]?.profileImageUrl + props?.sasToken
-							}
-						/>
-						<span>{isRank(2) ? props?.leaderBoard?.Items[2]?.rank : 0}</span>
-					</div>
-					<div className="username">
-						{isRank(2) ? props?.leaderBoard?.Items[2]?.userName : "Player 3"}
-					</div>
-					<div className="score">
-						<span>{isRank(2) ? props?.leaderBoard?.Items[2]?.score : 0}</span>
-					</div>
-				</div>
-			</div>
-		</RankStyles.Container>
-	);
+  return (
+    <RankStyles.Container>
+      <div
+        className={`rank-holder ${
+          props.leaderBoard?.length > 3 ? "attained-score" : ""
+        }`}
+      >
+        {props.leaderBoard?.length > 0 && (
+          <>
+            <div
+              className="rank-2"
+              title={props.leaderBoard?.[1]?.userName || "NA"}
+            >
+              <div className="rank">{props.leaderBoard?.[1]?.rank || "NA"}</div>
+              <div className="outer-border">
+                <div className="dp">
+                  <img
+                    className={`profile inner-content ${
+                      !props.leaderBoard?.[1]?.profileImageUrl ||
+                      !props.sasToken
+                        ? "default-avatar-gamify"
+                        : ""
+                    } ${
+                      props.leaderBoard?.[1]?.userId === props.userId
+                        ? "highlighted"
+                        : ""
+                    }`}
+                    alt=""
+                    src={
+                      props.leaderBoard?.[1]?.profileImageUrl?.includes(
+                        "assets"
+                      )
+                        ? `${props.leaderBoard?.[1]?.profileImageUrl}
+											  ${props.sasToken}`
+                        : props.leaderBoard?.[1]?.profileImageUrl || ""
+                    }
+                    onError={(event) => imgErrorHandler(event)}
+                  />
+                </div>
+              </div>
+              <div className="score">
+                <span>
+                  {ellipticString(props.leaderBoard?.[1]?.userName, 2)}
+                </span>
+                <span className="points">
+                  {props.leaderBoard?.[1]?.score || 0}
+                </span>
+              </div>
+            </div>
+
+            <div className="rank-1" title={props.leaderBoard?.[0]?.userName}>
+              <img className="crown" alt="crown" />
+              <div className="outer-border">
+                <div className="dp container">
+                  <img
+                    className={`profile inner-content ${
+                      !props.leaderBoard?.[0]?.profileImageUrl ||
+                      !props.sasToken
+                        ? "default-avatar-gamify"
+                        : ""
+                    } highlighted`}
+                    alt=""
+                    src={
+                      props.leaderBoard?.[0]?.profileImageUrl?.includes(
+                        "assets"
+                      )
+                        ? `${props.leaderBoard?.[0]?.profileImageUrl}
+											${props.sasToken}`
+                        : props.leaderBoard?.[0]?.profileImageUrl
+                    }
+                    onError={(event) => imgErrorHandler(event)}
+                  />
+                </div>
+              </div>
+              <div></div>
+              <div className="score">
+                <span>
+                  {ellipticString(props.leaderBoard?.[0]?.userName, 1)}
+                </span>
+                <span className="points">
+                  {props.leaderBoard?.[0]?.score || 0}
+                </span>
+              </div>
+            </div>
+
+            <div className="rank-3" title={props.leaderBoard?.[2]?.userName}>
+              <div className="rank">{props.leaderBoard?.[2]?.rank || "NA"}</div>
+              <div className="outer-border">
+                <div className="dp">
+                  <img
+                    className={`profile inner-content ${
+                      !props.leaderBoard?.[2]?.profileImageUrl ||
+                      !props.sasToken
+                        ? "default-avatar-gamify"
+                        : ""
+                    } ${
+                      props.leaderBoard?.[2]?.userId === props.userId
+                        ? "highlighted"
+                        : ""
+                    }`}
+                    alt=""
+                    src={
+                      props.leaderBoard?.[2]?.profileImageUrl?.includes(
+                        "assets"
+                      )
+                        ? `${props.leaderBoard?.[2]?.profileImageUrl}
+											${props.sasToken}`
+                        : props.leaderBoard?.[2]?.profileImageUrl
+                    }
+                    onError={(event) => imgErrorHandler(event)}
+                  />
+                </div>
+              </div>
+              <div className="score">
+                <span>
+                  {ellipticString(props.leaderBoard?.[2]?.userName, 3)}
+                </span>
+                <span className="points">
+                  {props.leaderBoard?.[2]?.score || 0}
+                </span>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </RankStyles.Container>
+  );
 };
 
-export default Rank;
+export default LeaderBoard;
