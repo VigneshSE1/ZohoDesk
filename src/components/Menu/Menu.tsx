@@ -58,55 +58,18 @@ export const Menu = (props: any) => {
 
   useEffect(() => {});
   return (
-    <PopupService>
-      <GlobalStyles.DMFonts>
-        {/* <MenuStyles.Menu>
-          <MenuStyles.Header>
-            <div>
-              <Info applicationId={props.applicationId} />
-            </div>
-            <MenuStyles.Wallet onClick={handleToggleTabs}>
-              <Bolt />
-              <div>{userInfo?.score || 0}</div>
-            </MenuStyles.Wallet>
-            <MenuStyles.ImgContainer onClick={handleToggleTabs}>
-              <img
-                src={`${userInfo?.profileImageUrl}`}
-                className={`${
-                  !userInfo?.profileImageUrl ? "default-avatar" : ""
-                }`}
-              />
-              <p>{userInfo?.userName}</p>
-            </MenuStyles.ImgContainer>
-          </MenuStyles.Header>
-          {showTabs && (
-            <div className="tabs">
-              <Tabs
-                clientId={props.clientId}
-                clientSecret={props.clientId}
-                userId={props.userId}
-                applicationId={props.applicationId}
-                userScore={userInfo.score}
-                profileImageUrl={userInfo?.profileImageUrl}
-              />
-            </div>
-          )}
-        </MenuStyles.Menu> */}
-        <div style={{ display: "flex", height: "100vh" }}>
-          <Achievement
-            userId={props.userId}
-            applicationId={props.applicationId}
-            clientId={props.clientId}
-            clientSecret={props.clientSecret}
-            userScore={props.userScore}
-            redemptionEnabled={props.redemptionEnabled}
-          />
-          <LeaderBoard
-            userInfo={userInfo}
-            applicationId={props.applicationId}
-          />
-        </div>
-      </GlobalStyles.DMFonts>
-    </PopupService>
+    <GlobalStyles.DMFonts>
+      <div style={{ display: "flex", height: "100vh" }}>
+        <Achievement
+          userId={props.userId}
+          applicationId={props.applicationId}
+          clientId={props.clientId}
+          clientSecret={props.clientSecret}
+          userScore={props.userScore}
+          redemptionEnabled={props.redemptionEnabled}
+        />
+        <LeaderBoard userInfo={userInfo} applicationId={props.applicationId} />
+      </div>
+    </GlobalStyles.DMFonts>
   );
 };

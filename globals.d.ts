@@ -15,7 +15,7 @@ type RouteToLocation = {
 };
 
 declare const ZOHODESK: {
-  get(object: string): Promise<any>;
+  get(object: string, options: { queriableValue: string }): Promise<any>;
   extension: any;
   showpopup(options: ShowPopupOptions): Promise<void>;
   set: (key: string, value: any) => Promise<{ status: string }>; //Note: This was done using AI and may not be accurate or complete
@@ -25,7 +25,11 @@ declare const ZOHODESK: {
     (action: "MODAL_CLOSE"): void;
   };
 };
-
+interface DatabaseRecord {
+  queriableValue: string;
+  value: { name: string };
+  key: string;
+}
 type InsertOptions = {
   value: string;
   type?: string;

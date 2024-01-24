@@ -68,9 +68,6 @@ const LeaderBoard: FC<LeaderBoardProps> = (props) => {
   const [sasToken, setSasToken] = useState<string>("");
 
   useEffect(() => {
-    console.log("------------------------------------------");
-    console.log(props.userInfo);
-    console.log("------------------------------------------");
     goToLocalLeaderBoard();
     getSasToken()
       .then((sasToken: string) => {
