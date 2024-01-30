@@ -34,7 +34,7 @@ const LeaderBoardStyles = {
       }
     }
     .bg-leaderboard {
-      background: url("../../../app/img/");
+      background: url("../../../app/img/leaderboard-bg.svg");
       background-position: top;
       height: 100%;
       background-repeat: no-repeat;

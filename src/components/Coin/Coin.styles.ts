@@ -1,3 +1,4 @@
+import { env } from "../../env/env";
 import styled from "styled-components";
 
 const CoinStyles = {

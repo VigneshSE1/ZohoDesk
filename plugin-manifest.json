@@ -16,7 +16,7 @@
     ]
   },
   "cspDomains": {
-    "connect-src": ["http://localhost:3000"]
+    "connect-src": ["http://localhost:3000", "https://localhost:44329"]
   },
   "zohoAuthorisation": {},
   "connectors": [],

@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
-
 import ProgressBar from "@ramonak/react-progress-bar";
 import ProgressStyles from "./ProgressBar.styles";
-import { RightArrow } from "../../common/icons/RightArrow";
 
 interface ProgressBarProps {
   progress: string;

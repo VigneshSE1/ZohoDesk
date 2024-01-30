@@ -9,8 +9,8 @@ const MenuStyles = {
     z-index: 999;
     .tabs {
       margin-top: 0.3em;
-      position: absolute;
-      right: 1em;
+      display: flex;
+      justify-content: center;
     }
   `,
   Header: styled.div`

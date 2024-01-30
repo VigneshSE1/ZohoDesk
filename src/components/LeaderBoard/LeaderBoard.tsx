@@ -76,7 +76,8 @@ const LeaderBoard: FC<LeaderBoardProps> = (props) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [props.userInfo.userId, props.applicationId]);
+
   return (
     <GlobalStyles.Scroll>
       <LeaderBoardStyles.Container className="container">

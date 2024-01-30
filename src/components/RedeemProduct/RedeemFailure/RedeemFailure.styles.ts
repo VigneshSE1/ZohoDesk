@@ -1,4 +1,6 @@
+import { env } from "../../../env/env";
 import styled from "styled-components";
+
 const modalWrap = `position: fixed !important;
 width: 100% !important;
 height: 100% !important;
@@ -23,12 +25,22 @@ const RedeemFailureStyles = {
       margin: auto !important;
       background: white !important;
       border-radius: 1.5rem !important;
-      color: $black !important;
+      color: black !important;
       min-width: 400px !important;
       .order-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        .close {
+          display: flex;
+          gap: 0.5em;
+          align-items: center;
+        }
+        button {
+          cursor: pointer;
+          border: none;
+          background: none;
+        }
       }
 
       .header-wallet {
@@ -45,21 +57,10 @@ const RedeemFailureStyles = {
         }
       }
 
-      .header-wallet-balance {
-        font-size: small;
-        display: flex;
-        gap: 10px;
-        background-color: #f2f2f2;
-        border-radius: 20px;
-        padding: 5px;
-        justify-content: center;
-        align-items: center;
-      }
-
       .header-failure {
         font-size: x-large;
         font-weight: bold;
-        margin-top: 15px;
+        margin: 0;
         display: flex;
       }
 
@@ -68,6 +69,10 @@ const RedeemFailureStyles = {
         margin: 20px;
         text-align: center;
         justify-content: center;
+        img.failure {
+          width: 4em;
+          margin-bottom: 10px;
+        }
         .failure-heading {
           font-weight: 500;
           font-size: medium;
@@ -83,10 +88,6 @@ const RedeemFailureStyles = {
             align-items: center;
             justify-content: center;
             margin-top: 10px;
-            img.wallet-coin {
-              width: 2em;
-              height: 2em;
-            }
           }
         }
       }
@@ -106,6 +107,9 @@ const RedeemFailureStyles = {
           padding: 7px 20px;
           width: 70%;
           cursor: pointer;
+          img {
+            width: 20px;
+          }
         }
       }
     }

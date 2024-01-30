@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Tabs from "../Tabs/Tabs";
 import { initializeClientCredentials } from "../../api/TokenService";
 import {
   getLocalLeaderBoardByUserId,
@@ -7,26 +6,48 @@ import {
   getUserInfo,
 } from "../../api/LeaderBoardService";
 import { ILeaderBoard } from "../../models/LeaderBoard";
-import { Bolt } from "../../common/icons/Bolt";
 import GlobalStyles from "../../common/styles/global.styles";
-import MenuStyles from "./Menu.styles";
-import { PopupService } from "../../api/PopupService";
-import { Info } from "../../common/icons/Info";
+import { getUserRewards } from "../../api/RedeemService";
 import Achievement from "../Achievements/Achievements";
 import LeaderBoard from "../LeaderBoard/LeaderBoard";
+import UserReward from "../UserReward/UserReward";
+import TabStyles from "./Tabs.styles";
 
 export const Menu = (props: any) => {
   const [showTabs, setShowTabs] = useState(false);
   const [sasToken, setSasToken] = useState<string>("");
   let [userInfo, setUserInfo] = useState<any>({});
-  initializeClientCredentials(props.clientId, props.clientSecret);
+  let [redemptionEnabled, setRedeemStatus] = useState<boolean>(false);
+  const [progressAndUserRewards, setUserReward] = useState<any>({});
+  const [isLoading, setLoader] = useState<boolean>(true);
+  const [avatarEditForm, setAvatarEditForm] = useState<boolean>(false);
+  const [gallaryEditForm, setGallaryEditForm] = useState<boolean>(false);
+  const tabNames = ["Achievement", "LeaderBoard"];
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleClick = (tabIndex: number) => {
+    setActiveTab(tabIndex);
+  };
+
   const handleToggleTabs = () => {
     setShowTabs(!showTabs);
   };
+
+  const toggleAvatar = () => {
+    setAvatarEditForm(!avatarEditForm);
+  };
+
+  const toggleGallary = () => {
+    setGallaryEditForm(!gallaryEditForm);
+  };
+
+  initializeClientCredentials(props.clientId, props.clientSecret);
+
   useEffect(() => {
     getUserInfo(props.userId, props.applicationId)
       .then((response) => {
         setUserInfo(response.data.data);
+        setRedeemStatus(response.data.data.client.redemptionEnabled);
       })
       .catch((error) => {
         console.error("Error fetching user info:", error);
@@ -56,19 +77,64 @@ export const Menu = (props: any) => {
       });
   }, [props.userId, props.applicationId]);
 
-  useEffect(() => {});
+  useEffect(() => {
+    getUserRewards(props.userId, props.applicationId)
+      .then((responseData: any) => {
+        setUserReward(responseData.data);
+        setLoader(false);
+      })
+      .catch((error: any) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
     <GlobalStyles.DMFonts>
-      <div style={{ display: "flex", height: "100vh" }}>
-        <Achievement
-          userId={props.userId}
-          applicationId={props.applicationId}
-          clientId={props.clientId}
-          clientSecret={props.clientSecret}
-          userScore={props.userScore}
-          redemptionEnabled={props.redemptionEnabled}
-        />
-        <LeaderBoard userInfo={userInfo} applicationId={props.applicationId} />
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <TabStyles.TabContainer>
+          <TabStyles.TabNav>
+            {tabNames.map((tabName, index) => (
+              <TabStyles.TabList
+                key={tabName}
+                className={activeTab === index ? "active" : ""}
+                onClick={() => handleClick(index)}
+              >
+                <a>{tabName}</a>
+              </TabStyles.TabList>
+            ))}
+          </TabStyles.TabNav>
+        </TabStyles.TabContainer>
+      </div>
+      <div
+        style={{
+          width: "50%",
+          marginLeft: "25%",
+          height: "100vh",
+          alignItems: "center",
+        }}
+      >
+        {activeTab === 0 ? (
+          <div>
+            <Achievement
+              userId={props.userId}
+              applicationId={props.applicationId}
+              clientId={props.clientId}
+              clientSecret={props.clientSecret}
+              userScore={props.userScore}
+              redemptionEnabled={props.redemptionEnabled}
+            />
+            <UserReward
+              userRewards={progressAndUserRewards.userRewards}
+              isLoading={isLoading}
+              appId={props.applicationId}
+            />
+          </div>
+        ) : (
+          <LeaderBoard
+            userInfo={userInfo}
+            applicationId={props.applicationId}
+          />
+        )}
       </div>
     </GlobalStyles.DMFonts>
   );

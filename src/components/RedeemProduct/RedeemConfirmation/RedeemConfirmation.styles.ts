@@ -1,3 +1,4 @@
+import { env } from "../../../env/env";
 import styled from "styled-components";
 
 const modalWrap = `position: fixed !important;
@@ -27,42 +28,43 @@ const RedeemConfirmStyles = {
       color: black !important;
       min-width: 400px !important;
       header {
-        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         .close {
           display: flex;
-          justify-content: space-between;
-          width: 100%;
-          .wallet {
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-            button {
-              border: none;
-              background: none;
-              color: #a2a2a2;
-              letter-spacing: 0.5px;
-              font-size: 0.9em;
-              cursor: pointer;
-            }
-            .coin {
-              display: flex;
-              gap: 5px;
-              align-items: center;
-              border: 1px solid #dddddd;
-              background: #efefef;
-              border-radius: 1.4em;
-              padding: 0.4em 0.5em;
-              .img-width {
-                width: 1.75em;
-              }
-            }
-          }
+          gap: 1em;
         }
         h2 {
           font-weight: 700;
           font-size: 2em;
           letter-spacing: 0.75px;
-          margin-top: 0.5em;
+          margin: 0;
+        }
+        .wallet {
+          display: flex;
+          align-items: center;
+          gap: 0.5em;
+          button {
+            border: none;
+            background: none;
+            color: #a2a2a2;
+            letter-spacing: 0.5px;
+            font-size: 0.9em;
+            cursor: pointer;
+          }
+          .coin {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            border: 1px solid #dddddd;
+            background: #efefef;
+            border-radius: 1.4em;
+            padding: 0.4em 0.5em;
+            .img-width {
+              width: 1.75em;
+            }
+          }
         }
       }
       .success-details {
@@ -71,6 +73,10 @@ const RedeemConfirmStyles = {
         .success-img {
           display: flex;
           justify-content: center;
+          img.success {
+            content: url("${env.BLOB_URL}/${env.CONTAINER_PATH}/success.jpg");
+            margin-bottom: 10px;
+          }
         }
         .success-heading {
           font-weight: 500;
@@ -100,6 +106,11 @@ const RedeemConfirmStyles = {
       .success-footer {
         text-align: center;
         margin: 30px;
+        .delivery {
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+        }
         .delivered {
           color: #898989;
           font-size: small;
@@ -117,7 +128,7 @@ const RedeemConfirmStyles = {
             justify-content: space-between;
             background-color: #e8e8e8;
             border-radius: 15px;
-            padding: 7px 10px;
+            padding: 0.5em 1em;
             cursor: pointer;
           }
         }

@@ -1,13 +1,12 @@
 import React, { FC, useEffect, useState } from "react";
-
-import CoinStyles from "./Coin.styles";
-import PopUpStyles from "../../common/styles/PopUp.styles";
 import { RightArrow } from "../../common/icons/RightArrow";
 import Wallet from "../Wallet/Wallet";
 import { env } from "../../env/env";
 import { getSasToken } from "../../api/LeaderBoardService";
 import { getWalletBalance } from "../../api/RedeemService";
 import { usePopup } from "../../api/PopupService";
+import PopUpStyles from "../../common/styles/PopUp.styles";
+import CoinStyles from "./Coin.styles";
 
 interface CoinProps {
   userId: string;
@@ -49,7 +48,6 @@ const Coin: FC<CoinProps> = (props) => {
   return (
     <CoinStyles.CoinHeader className="card-item" onClick={createWalletPopUp}>
       <div className="proheader">Wallet</div>
-
       <div className="content">
         <img
           className={`coins rotating-coin ${!imageUrl ? "default-coin" : ""}`}

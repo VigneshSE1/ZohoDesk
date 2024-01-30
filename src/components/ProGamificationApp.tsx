@@ -19,7 +19,7 @@ const ProGamificationApp = () => {
       queriableValue: "",
     })
       .then(function (userResponse) {
-        setCurretUserId(userResponse["user"]?.id);
+        setCurretUserId(userResponse["user"]?.email);
       })
       .catch(function (error) {
         setCurretUserId("");
@@ -27,7 +27,6 @@ const ProGamificationApp = () => {
     getClientCredentials()
       .then((res) => {
         const credentials = res["database.get"]["data"][0]?.value;
-        console.log(credentials, "credentials");
         if (credentials) {
           setClientCred(credentials);
         } else {

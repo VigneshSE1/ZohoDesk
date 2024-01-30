@@ -23,8 +23,7 @@
 
 // for Testing
 export const env = {
-  REACT_APP_REDEEM_BASEURL:
-    "https://stage-gamificationredemption.theproindia.com",
+  REACT_APP_REDEEM_BASEURL: "https://localhost:44329",
   REACT_APP_GAMIFICATION_BASEURL: "http://localhost:3000",
   BLOB_URL: "https://stagegamificationui.blob.core.windows.net",
   CONTAINER_PATH: "sandbox-assets",

@@ -1,93 +1,116 @@
+import { env } from "../../../env/env";
 import styled from "styled-components";
 
-const rankCircle = `position: absolute;
-border-radius: 50%;
-background-color: #ebebeb;
-padding: 1px 7px;
-font-size: small;
-border: 2px solid white;
-font-weight: 500;
-bottom: 0%;
-right: 29%;`;
-const ellipsis = `
-text-align: center;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-width: 6em;`;
 const RankStyles = {
   Container: styled.div`
     .rank-holder {
-      margin: 2em auto;
-      height: 12em;
+      margin: 3em auto -1em;
+      height: 15em;
       display: flex;
       justify-content: space-evenly;
-      font-weight: 500;
+      font-weight: bold;
+      .score {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        font-size: 0.8em;
+        gap: 0.5em;
+
+        .points {
+          background-color: #f0f0f0;
+          border-radius: 1.5em;
+          width: auto;
+          font-size: 0.9em;
+          padding: 0.45em 1.3em;
+          font-weight: medium;
+        }
+      }
+      .rank {
+        color: #ee8c40;
+        font-weight: bold;
+      }
 
       .profile {
-        width: 4.5em;
-        height: 4.5em;
+        width: 3.5em;
+        height: 3.5em;
         background-size: cover !important;
         border-radius: 50% !important;
+
         &.highlighted {
-          border: 2px solid #fa5050;
+          &.inner-content {
+            border: 0.65em solid #ff8725;
+            padding: 0.2em;
+          }
         }
+        &.default-avatar-gamify {
+          content: url("${env.BLOB_URL}/${env.CONTAINER_PATH}/avatar.png");
+        }
+      }
+      .outer-border {
+        display: flex;
+        border: 0.6em solid #ff7c000f;
+        border-radius: 6em;
+      }
+      .inner-content {
+        display: flex;
+        border: 0.4em solid rgba(255, 115, 0, 0.31);
+        border-radius: 5em;
       }
 
       .rank-2 {
         min-width: 0;
-        align-self: flex-end;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        .dp {
-          position: relative;
-          span {
-            ${rankCircle}
-          }
-        }
-        .username {
-          ${ellipsis}
-        }
-      }
-      .rank-1 {
         align-self: flex-start;
         align-items: center;
         display: flex;
         flex-direction: column;
-        .dp {
-          position: relative;
-          span {
-            ${rankCircle}
-          }
-        }
-        .username {
-          ${ellipsis}
+        gap: 0.5em;
+
+        .inner-content {
+          border-color: rgba(255, 115, 0, 0.31);
         }
       }
-      .rank-3 {
+      .rank-1 {
         align-self: flex-end;
         align-items: center;
         display: flex;
         flex-direction: column;
-        .dp {
-          position: relative;
-          span {
-            ${rankCircle}
-          }
+        gap: 0.5em;
+        .profile {
+          height: -webkit-fill-available;
+          position: absolute;
+          width: -webkit-fill-available;
+          left: 0;
         }
-        .username {
-          ${ellipsis}
+        .container {
+          border: 1.1em solid rgba(255, 124, 0, 0.28);
+          border-radius: 5em;
+          background-color: #ecf0f1;
+          width: 6.5em;
+          height: 6.5em;
+          position: relative;
+        }
+        img.crown {
+          content: url("../../../../app/img/crown.svg");
+          width: 1.5em;
+        }
+        .outer-border {
+          border-width: 1em;
         }
       }
-      .score {
+      .rank-3 {
+        align-self: flex-start;
+        align-items: center;
         display: flex;
-        gap: 0.2em;
-        lib-bolt {
-          display: inherit;
+        flex-direction: column;
+        gap: 0.5em;
+
+        .inner-content {
+          border-color: rgba(255, 115, 0, 0.31);
         }
       }
     }
+
     .rank-holder .rank-1,
     .rank-holder .rank-2,
     .rank-holder .rank-3 {
@@ -97,15 +120,15 @@ const RankStyles = {
     }
 
     .rank-holder .rank-3 {
-      animation: fadeInAndSlide 0.5s ease-in-out 0.3s forwards;
+      animation: fadeInAndSlide 0.2s ease-in-out 0.2s forwards;
     }
 
     .rank-holder .rank-2 {
-      animation: fadeInAndSlide 0.5s ease-in-out 1.3s forwards;
+      animation: fadeInAndSlide 0.2s ease-in-out 1s forwards;
     }
 
     .rank-holder .rank-1 {
-      animation: fadeInAndSlide 0.5s ease-in-out 2.3s forwards;
+      animation: fadeInAndSlide 0.2s ease-in-out 2s forwards;
     }
 
     @keyframes fadeInAndSlide {
