@@ -12,7 +12,7 @@ const GlobalStyles = {
     }
   `,
   DMFonts: styled.div`
-    @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100&family=Indie+Flower&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400&family=Indie+Flower&display=swap");
   `,
 };
 

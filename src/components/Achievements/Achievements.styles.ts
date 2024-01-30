@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const AchievementStyles = {
   Container: styled.div`
+    font-family: "DM Sans", sans-serif;
     padding: 0.6em;
     .card {
       margin: 0.7em 0.4em;

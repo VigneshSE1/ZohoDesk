@@ -14,6 +14,7 @@ let $bottomColor6 = "#d8b835";
 
 const RewardStyles = {
   RewardContainer: styled.div`
+    font-family: "DM Sans", sans-serif;
     padding: 1.2em;
     .user-rewards {
       display: grid;

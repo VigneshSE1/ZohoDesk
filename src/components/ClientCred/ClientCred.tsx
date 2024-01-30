@@ -8,7 +8,6 @@ const ClientCred = (props: any) => {
   const { register, handleSubmit } = useForm<IClientData>();
 
   const handleFormSubmit: SubmitHandler<IClientData> = (data) => {
-    console.log(data);
     props.onButtonClick(data);
     setClientCredentials(data)
       .then((res: any) => {

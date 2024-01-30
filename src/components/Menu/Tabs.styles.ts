@@ -6,6 +6,7 @@ const TabStyles = {
     min-width: 410px;
     background-color: white !important;
     z-index: 9999 !important;
+    font-family: "DM Sans", sans-serif;
   `,
   TabNav: styled.ul`
     display: flex !important;
